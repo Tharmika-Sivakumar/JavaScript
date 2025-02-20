@@ -1,0 +1,60 @@
+<style>
+    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+</style>
+
+<h2>Student Form</h2>
+<form id="student-form">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="number" id="age" placeholder="Age" required>
+    <label>Gender:</label>
+    <input type="radio" name="gender" value="Male" required> Male
+    <input type="radio" name="gender" value="Female" required> Female
+    <input type="text" id="course" placeholder="Course" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <button type="submit">Save</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Course</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="student-table"></tbody>
+</table>
+
+<script>
+    var studentTable = document.getElementById("student-table");
+
+    
+    document.getElementById("student-form").addEventListener("submit", function(event) {
+        event.preventDefault(); 
+        add();
+    });
+
+    function add() {
+        var name = document.getElementById("name").value;
+        var age = document.getElementById("age").value;
+        var gender = document.querySelector("input[name='gender']:checked").value;
+        var course = document.getElementById("course").value;
+        var email = document.getElementById("email").value;
+
+        
+        var row = document.createElement("tr");
+        row.innerHTML = "<td>" + name + "</td><td>" + age + "</td><td>" + course + "</td><td>" + gender + "</td><td>" + email + "</td><td><button onclick='deleteItem(event)'>Delete</button></td>";
+
+        studentTable.append(row);
+
+        
+        document.getElementById("student-form").reset();
+    }
+
+    function deleteItem(event) {
+        event.target.parentElement.parentElement.remove();
+    }
+</script>
